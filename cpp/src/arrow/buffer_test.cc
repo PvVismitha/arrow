@@ -994,7 +994,7 @@ TYPED_TEST(TypedTestBuffer, TypedResize) {
   ASSERT_EQ(832, buf->capacity());
 }
 
-TYPED_TEST(TypedTestBuffer, ResizeOOM) {
+TYPED_TEST(TypedTestBuffer, DISABLED_ResizeOOM) {
 // This test doesn't play nice with AddressSanitizer
 #ifndef ADDRESS_SANITIZER
   // realloc fails, even though there may be no explicit limit

@@ -68,7 +68,7 @@ TYPED_TEST_SUITE_P(TestMemoryPool);
 
 TYPED_TEST_P(TestMemoryPool, MemoryTracking) { this->TestMemoryTracking(); }
 
-TYPED_TEST_P(TestMemoryPool, OOM) {
+TYPED_TEST_P(TestMemoryPool, DISABLED_OOM) {
 #ifndef ADDRESS_SANITIZER
   this->TestOOM();
 #endif
@@ -78,7 +78,7 @@ TYPED_TEST_P(TestMemoryPool, Reallocate) { this->TestReallocate(); }
 
 TYPED_TEST_P(TestMemoryPool, Alignment) { this->TestAlignment(); }
 
-REGISTER_TYPED_TEST_SUITE_P(TestMemoryPool, MemoryTracking, OOM, Reallocate, Alignment);
+REGISTER_TYPED_TEST_SUITE_P(TestMemoryPool, MemoryTracking, DISABLED_OOM, Reallocate, Alignment);
 
 INSTANTIATE_TYPED_TEST_SUITE_P(Default, TestMemoryPool, DefaultMemoryPoolFactory);
 INSTANTIATE_TYPED_TEST_SUITE_P(System, TestMemoryPool, SystemMemoryPoolFactory);

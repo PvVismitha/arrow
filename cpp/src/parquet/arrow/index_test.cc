@@ -36,6 +36,7 @@
 #include "arrow/testing/gtest_util.h"
 #include "arrow/testing/random.h"
 #include "arrow/util/checked_cast.h"
+#include "arrow/util/endian.h"
 
 #include "parquet/arrow/reader.h"
 #include "parquet/arrow/reader_internal.h"
@@ -110,11 +111,15 @@ struct ColumnIndexObject {
 };
 
 auto encode_int64 = [](int64_t value) {
-  return std::string(reinterpret_cast<const char*>(&value), sizeof(int64_t));
+  uint64_t le_value = ::arrow::bit_util::ToLittleEndian(static_cast<uint64_t>(value));
+  return std::string(reinterpret_cast<const char*>(&le_value), sizeof(int64_t));
 };
 
 auto encode_double = [](double value) {
-  return std::string(reinterpret_cast<const char*>(&value), sizeof(double));
+  uint64_t int_value;
+  std::memcpy(&int_value, &value, sizeof(double));
+  uint64_t le_value = ::arrow::bit_util::ToLittleEndian(int_value);
+  return std::string(reinterpret_cast<const char*>(&le_value), sizeof(double));
 };
 
 }  // namespace

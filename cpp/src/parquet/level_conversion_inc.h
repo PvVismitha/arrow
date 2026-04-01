@@ -301,7 +301,7 @@ int64_t DefLevelsBatchToBitmap(const int16_t* def_levels, const int64_t batch_si
 
   // Greater than level_info.def_level - 1 implies >= the def_level
   auto defined_bitmap = static_cast<extract_bitmap_t>(::arrow::bit_util::FromLittleEndian(
-      internal::GreaterThanBitmap(def_levels, batch_size, level_info.def_level - 1)));
+        internal::GreaterThanBitmap(def_levels, batch_size, level_info.def_level - 1)));
 
   if (has_repeated_parent) {
     // Greater than level_info.repeated_ancestor_def_level - 1 implies >= the
